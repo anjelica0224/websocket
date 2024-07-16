@@ -19,25 +19,7 @@ function sendM(){
 function Message(from, what, time){
     const box = document.createElement("div")
     box.setAttribute("class", "box")
-
-    //const pfp = document.createElement("button")
-    // function stringToColour(str){
-    //     let hash = 0;
-    //     str = from * from+1 * from+2 * from+3
-    //     str.split('').forEach(char => {
-    //         hash = char.charCodeAt(0) + ((hash << 5) - hash)
-    //     })
-    //     let colour = '#'
-    //     for (let i = 0; i < 3; i++) {
-    //         const value = (hash >> (i * 8)) & 0xff
-    //         colour += value.toString(16).padStart(2, '0')
-    //     }
-    //     return colour
-    //     }
-    // pfp.setAttribute("class", "pfp")
-    // pfp.setAttribute("color",`${stringToColour(from)}`)
-    // box.appendChild(pfp)
-
+    
     const ID = document.createElement("span")
     ID.innerText = `${from}`
     ID.setAttribute("class", "ID")
@@ -51,19 +33,16 @@ function Message(from, what, time){
     const time1 = new Date(time)
     const hour = time1.getHours()
     const min = time1.getMinutes()
-    const WHEN = document.createElement("span")
+    const WHEN = document.createElement("div")
     WHEN.innerText = `${hour}:${min}`
     WHEN.setAttribute("class", "WHEN")
-    const boxr = document.createElement("div")
-    boxr.setAttribute('class','WHENR')
-    boxr.appendChild(WHEN)
-    box.appendChild(boxr)
+    box.appendChild(WHEN)
 
     mytexts.appendChild(box)
 }
 
 var initial = "Hey Welcome to the hub! \n This is a space for open discussion and exploration. \nFeel free to start a conversation that boggles our mind as well!\n Happy talking!"
-var initial1 = "This is a space for open discussion and exploration."
+var initial1 = "you can start now!"
 var Server = "Server"
 function inM(){
     var now = new Date();
@@ -77,6 +56,7 @@ function inM1(){
 socket.onopen = function() {
     button.disabled = false
     let timer = setTimeout(inM, 1000);
+    let timer1 = setTimeout(inM1, 4000);
 }
 socket.onmessage = (event) => {
     const topass = JSON.parse(event.data)
