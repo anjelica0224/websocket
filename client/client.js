@@ -35,6 +35,7 @@ function Message(from, what, time, profile){
     const box = document.createElement("div")
     box.setAttribute("class", "box")
 
+    //part1
     const container1 = document.createElement("div")
     container1.setAttribute("class", "firstflex")
     var svgParent = new SvgContainer({
@@ -51,7 +52,10 @@ function Message(from, what, time, profile){
     container1.appendChild(svgParent)
     box.appendChild(container1)
 
+    const BIG = document.createElement("div")
+    BIG.setAttribute("class", "BIG")
 
+    //part2
     const container = document.createElement("div")
     container.setAttribute("class", "secondflex")
 
@@ -59,12 +63,6 @@ function Message(from, what, time, profile){
     ID.innerText = `${from}`
     ID.setAttribute("class", "ID")
     container.appendChild(ID)
-    
-    const MESS = document.createElement("span")
-    MESS.innerText = `${what}`
-    MESS.setAttribute("class", "MESS")
-    container.appendChild(MESS)
-    box.appendChild(container)
 
     const time1 = new Date(time)
     const hour = time1.getHours()
@@ -72,8 +70,20 @@ function Message(from, what, time, profile){
     const WHEN = document.createElement("div")
     WHEN.innerText = `${hour}:${min}`
     WHEN.setAttribute("class", "WHEN")
-    box.appendChild(WHEN)
+    container.appendChild(WHEN)
+    BIG.appendChild(container)
 
+    
+    //part3
+    const container2 = document.createElement("div")
+    container2.setAttribute("class", "thirdflex")
+    const MESS = document.createElement("span")
+    MESS.innerText = `${what}`
+    MESS.setAttribute("class", "MESS")
+    container2.appendChild(MESS)
+    BIG.appendChild(container2)
+
+    box.appendChild(BIG)
     mytexts.appendChild(box)
 }
 
