@@ -2,8 +2,6 @@ const url = 'ws://127.0.0.1:443'
 
 const socket = new WebSocket(url)
 
-
-
 const mytexts = document.getElementById("messages")
 const myinput = document.getElementById('input')
 const button = document.getElementById('send')
@@ -15,20 +13,58 @@ function sendM(){
     socket.send(txt)
     myinput.value = ""
 }
+function Circle(obj){
+    var line = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    for(prop in obj) {
+        line.setAttribute(prop, obj[prop])  
+    }
+    return line;
+}
 
-function Message(from, what, time){
+function SvgContainer(obj) {
+    var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    svg.setAttribute("class", "pfps")
+    for(prop in obj) {
+        svg.setAttribute(prop, obj[prop])  
+    }
+    return svg;
+}
+
+
+function Message(from, what, time, profile){
     const box = document.createElement("div")
     box.setAttribute("class", "box")
-    
+
+    const container1 = document.createElement("div")
+    container1.setAttribute("class", "firstflex")
+    var svgParent = new SvgContainer({
+        'width': 30,
+        'height': 30
+    });
+    var CIRCLE = new Circle({
+        'r': 15,
+        'cx': 15,
+        'cy': 15,
+        'fill': profile
+    });
+    svgParent.appendChild(CIRCLE)
+    container1.appendChild(svgParent)
+    box.appendChild(container1)
+
+
+    const container = document.createElement("div")
+    container.setAttribute("class", "secondflex")
+
     const ID = document.createElement("span")
     ID.innerText = `${from}`
     ID.setAttribute("class", "ID")
-    box.appendChild(ID)
-
+    container.appendChild(ID)
+    
     const MESS = document.createElement("span")
     MESS.innerText = `${what}`
     MESS.setAttribute("class", "MESS")
-    box.appendChild(MESS)
+    container.appendChild(MESS)
+    box.appendChild(container)
 
     const time1 = new Date(time)
     const hour = time1.getHours()
@@ -46,33 +82,19 @@ var initial1 = "you can start now!"
 var Server = "Server"
 function inM(){
     var now = new Date();
-    Message(Server, initial, now)
+    Message(Server, initial, now, "#99aab5")
 }
 function inM1(){
     var now = new Date();
-    Message(Server, initial1, now)
+    Message(Server, initial1, now, "#99aab5")
 }
 
 socket.onopen = function() {
     button.disabled = false
     let timer = setTimeout(inM, 1000);
-    let timer1 = setTimeout(inM1, 4000);
+    let timer1 = setTimeout(inM1, 3000);
 }
 socket.onmessage = (event) => {
     const topass = JSON.parse(event.data)
-    if(topass.message != ""){Message(topass.id, topass.message, topass.date)}
-    
-    //Message(JSON.parse(event.data).id, JSON.parse(event.data).message, JSON.parse(event.data).date)
-    //MessageID((JSON.parse(event.data).date))
-    //MessageID(event.data.toString().message)
-    //const senttxt = JSON.parse(event.data).message
-    //console.log(senttxt)
-    //const dataBuffer = Buffer.from(senttxt)
-    //onst utf16Decoder = new TextDecoder('UTF-16')
-   // console.log(dataBuffer.toString())
-    //console.log('whew')
-    //console.log(utf16Decoder.decode(dataBuffer))
-    //console.log( JSON.parse(event.data))
-    
-
+    if(topass.message != ""){Message(topass.id, topass.message, topass.date, topass.pfp)}
 }
