@@ -54,7 +54,10 @@ function Message(from, what, time){
     const WHEN = document.createElement("span")
     WHEN.innerText = `${hour}:${min}`
     WHEN.setAttribute("class", "WHEN")
-    box.appendChild(WHEN)
+    const boxr = document.createElement("div")
+    boxr.setAttribute('class','WHENR')
+    boxr.appendChild(WHEN)
+    box.appendChild(boxr)
 
     mytexts.appendChild(box)
 }
@@ -74,7 +77,6 @@ function inM1(){
 socket.onopen = function() {
     button.disabled = false
     let timer = setTimeout(inM, 1000);
-    timer()
 }
 socket.onmessage = (event) => {
     const topass = JSON.parse(event.data)

@@ -25,18 +25,22 @@ h1{
 }
 .box{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    align-items: flex-start;
     color:azure;
     font-weight: lighter;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     justify-content: flex-start;
-    align-items : flex-end;
     border-radius: 10px;
-    border: 2px solid #dedede;
-    border-radius: 5px;
+    /*border: 2px solid #dedede;*/
     padding: 10px;
     margin: 10px 0;
-      
+    flex-wrap: wrap;
+}
+
+.WHENR{
+    display: flex;
+    align-items: stretch;
 }
 
 input[type=text]{
