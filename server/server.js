@@ -26,7 +26,7 @@ socket.on('connection', ws => {
         }
         return `#${decimal.toString(16)}`
     }
-    console.log(`${color()}`)
+    //console.log(`colorid of user : ${color()}`)
 
     //ws.send('You just joined the chatroom!')
     ws.on('close', ()=>console.log('client disconnected'))
