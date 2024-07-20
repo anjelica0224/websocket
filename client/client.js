@@ -108,7 +108,7 @@ function Slide(id){
 socket.onopen = (event) => {
    // console.log(`${JSON.parse(event.data)}`)
     button.disabled = false
-    let timer = setTimeout(inM, 1000);
+    let timer = setTimeout(inM, 2000);
     let timer1 = setTimeout(inM1, 3000);  
 }
 socket.onmessage = (event) => {

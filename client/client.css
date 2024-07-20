@@ -7,20 +7,6 @@
   --font-heading: 'Playfair Display', serif;
 }
 
-
-
-
-.sidebar{
-    height : 100%;
-    position : fixed;
-    background: #36393e;
-    top : 0;
-    left : 0;
-    width : 160px;
-    padding: 20px;
-    color: azure;
-}
-
 .main {
     margin: auto;
     height: 600px;
@@ -125,8 +111,6 @@ p{
 
 }
 
-
-
 input[type=text]{
     background-color: #333;
     width: 100%;
@@ -178,12 +162,12 @@ div.bottom :first-child {
 
  .wrapper {
     height: 100vh;
-    
     perspective: 10px;
-    background-image: url(https://images.unsplash.com/photo-1520531158340-44015069e78e?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fGJsYWNrJTIwYW5kJTIwd2hpdGUlMjBjaXR5fGVufDB8fDB8fHww);
+    /*background-image: url(https://images.unsplash.com/photo-1520531158340-44015069e78e?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fGJsYWNrJTIwYW5kJTIwd2hpdGUlMjBjaXR5fGVufDB8fDB8fHww);
     background-size: 100% 100%;
-    background-repeat: no-repeat;
-    
+    background-repeat: no-repeat;*/
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 header {
@@ -195,6 +179,7 @@ header {
     height: 100%;
     transform-style: preserve-3d;
     z-index: -1;
+    transform: translateZ(-10px) scale(2);
 }
 
   
@@ -206,6 +191,7 @@ header {
     z-index: -1;
     transform: translateZ(-10px) scale(2);
 }
+
 .secondwrap{
     background-image: url(https://i.pinimg.com/736x/8e/1c/18/8e1c18e08df9e22ede87d3fb438c8b18.jpg);
     margin-top: 0px;
@@ -213,5 +199,5 @@ header {
     background-size: 100% 100%;
     display: flex;
     background-repeat: no-repeat;
-
+    
 }
