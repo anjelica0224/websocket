@@ -66,7 +66,9 @@ function Message(from, what, time, profile){
 
     const time1 = new Date(time)
     const hour = time1.getHours()
+    if (hour < 10)  hour = '0'+hour;
     const min = time1.getMinutes()
+    if (min < 10) min = '0'+min;
     const WHEN = document.createElement("div")
     WHEN.innerText = `${hour}:${min}`
     WHEN.setAttribute("class", "WHEN")
