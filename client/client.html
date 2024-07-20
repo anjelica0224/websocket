@@ -2,28 +2,49 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WebSocket | aj</title>
     <script defer src="client.js"> </script>
     <link href="client.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Cinzel:wght@400..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="sidebar">
-        
-    </div>
-    <div class="main">
-        <h1> HELLO WEBSOCKET USERS</h1>
-        <div id="messages">
-
+    <div class="wrapper">
+        <header>
+            <h1><span class="small">my kinda</span> Bell Jar</h1>
+            <p>Hey there, word nerds. I assume you're one of my friends if you landed here.<br>So, cybersecurity was getting a little... well, not exactly thrilling. So someone told me something about building a <i>WebSocket</i> to get a relief from my boredom.
+                <br>Here's the gist: WebSockets basically create a permanent connection between your browser and this server, so messages zip back and forth in real-time, it's like a constant back-and-forth, just like a good conversation should be.
+                <br>Fast forward-this little chat space. You know, the kind where you can ditch the mainstream and actually have a conversation without the noise. Primarily for my friends, especially the ones grounded from using social media or stuck with wayy more stricter parents than mine(eye roll).
+                Also there's a slight touch of Sylvia Plath inspiration(me and my naive headspace). You know, "The Bell Jar"? A place where we can riff on ideas, dissect the world (à la Virginia Woolf, of course!). Let's see where the conversation takes us.
+            </p>
+        </header>
+        <div class="blank"></div>
+        <div class="secondwrap">
+            <div class="main">
+                <table id="container">
+                    <tr>
+                        <td valign="top">
+                            <div id="messages"></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td valign="bottom">
+                            <div class="bottom">
+                                <input type="text" id="input" placeholder="Type your message here">
+                                <div class="space"></div>
+                                <span id="send">Send</span>
+                            </div> 
+                        </td>
+                    </tr>
+                </table> 
+            </div>
         </div>
-        <div class="bottom">
-            <input type="text" id="input" placeholder="Type your message here">
-            <span id="send">Send</span>
-        </div>
-        
-        
     </div>
     
 </body>

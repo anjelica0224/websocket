@@ -1,4 +1,4 @@
-const url = 'ws://127.0.0.1:443'
+const url = 'ws://localhost:443'
 
 const socket = new WebSocket(url)
 
@@ -98,13 +98,21 @@ function inM1(){
     var now = new Date();
     Message(Server, initial1, now, "#99aab5")
 }
+function Slide(id){
+    const slide = document.createElement("slide")
+    slide.innerText = id
+    const sidebar = document.getElementById('sidebar')
+    sidebar.appendChild(slide)
+}
 
-socket.onopen = function() {
+socket.onopen = (event) => {
+   // console.log(`${JSON.parse(event.data)}`)
     button.disabled = false
     let timer = setTimeout(inM, 1000);
-    let timer1 = setTimeout(inM1, 3000);
+    let timer1 = setTimeout(inM1, 3000);  
 }
 socket.onmessage = (event) => {
     const topass = JSON.parse(event.data)
+    //console.log(`ClientID${(topass.prompt)}`)
     if(topass.message != ""){Message(topass.id, topass.message, topass.date, topass.pfp)}
 }

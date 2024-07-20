@@ -1,3 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&family=Playfair+Display:wght@700&display=swap');
+
+:root {
+  --scale: 0.1;
+  --space: 8vmin;
+  --font-primary: 'Lato', sans-serif;
+  --font-heading: 'Playfair Display', serif;
+}
+
+
+
+
 .sidebar{
     height : 100%;
     position : fixed;
@@ -6,18 +18,58 @@
     left : 0;
     width : 160px;
     padding: 20px;
+    color: azure;
 }
 
-.main{
-    margin-left : 160px;
-    height: 100%;   
+.main {
+    margin: auto;
+    height: 600px;
+    background-color: #1e2124;
+    opacity: 0.7;
+    width: 35%;
+    overflow: auto;
+    display: flex;
+    flex-direction: column-reverse;
+    margin-bottom: 150px;
+    border-radius: 30px;
+    margin-top: 150px;
+    padding: 20px;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 h1{
-    font-family: 'Orbitron', sans-serif;
+    
     text-shadow: 10px 5px 4px grey;
     color: whitesmoke;
     text-align: center;
+    font-family: "Cinzel", serif;
+    font-optical-sizing: auto;
+    font-size: 100px;
+    margin-top: 27%;
+    margin-bottom: 20px;
+
+    
 }
+.small{
+    text-shadow: 10px 5px 4px grey;
+    color: whitesmoke;
+    text-align: center;
+    font-family: var(--font-primary);
+    font-size: 70px;
+    font-family: "Caveat", cursive;
+}
+p{
+    padding: 30px;
+    color:seashell;
+    font-weight: lighter;
+    font-family: var(--font-primary);
+    line-height: 1.6;
+    margin-right: 300px;
+    margin-left: 300px;
+    margin-bottom: 10px;
+    font-size:smaller;
+}
+
 #messages{
     display: flex;
     flex-direction: column;
@@ -74,6 +126,7 @@ h1{
 }
 
 
+
 input[type=text]{
     background-color: #333;
     width: 100%;
@@ -88,7 +141,6 @@ input[type=text]{
 div.bottom{
     bottom :0;
     display: flex;
-    position: fixed;
     align-self: stretch;
     width: 100%;
     font-size: 20px;
@@ -96,6 +148,10 @@ div.bottom{
 div.bottom :first-child {
     width: 80%;
   }
+.space{
+    opacity:0.7;
+    width:10px;
+}
 #send{
     padding: 6px 12px;
     border: none;
@@ -109,8 +165,53 @@ div.bottom :first-child {
 }
 
 * {
-    /*margin: 10px;*/
+    margin: 0px;
     padding: 0px;
-    box-sizing: border-box;
-    background-color: #1e2124;
+    /*box-sizing: border-box;*/
+    
  }
+ #container {
+    height: 100%;
+    border-collapse: collapse;
+
+}
+
+ .wrapper {
+    height: 100vh;
+    
+    perspective: 10px;
+    background-image: url(https://images.unsplash.com/photo-1520531158340-44015069e78e?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fGJsYWNrJTIwYW5kJTIwd2hpdGUlMjBjaXR5fGVufDB8fDB8fHww);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    
+}
+
+header {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    transform-style: preserve-3d;
+    z-index: -1;
+}
+
+  
+.background{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    z-index: -1;
+    transform: translateZ(-10px) scale(2);
+}
+.secondwrap{
+    background-image: url(https://i.pinimg.com/736x/8e/1c/18/8e1c18e08df9e22ede87d3fb438c8b18.jpg);
+    margin-top: 0px;
+    background-attachment: fixed;
+    background-size: 100% 100%;
+    display: flex;
+    background-repeat: no-repeat;
+
+}
