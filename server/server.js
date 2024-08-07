@@ -15,13 +15,19 @@ http.createServer((req,res) => {
 
 const socket = new WebSocketServer({port: 443})
 socket.on('connection', (ws) => {
-    // ws.on('open', function open() {
-    //     console.log('A new client has connected');
-    //   });
     var clientID = ws._socket._handle.fd;
     console.log(`new client ID${clientID} connected `)
-    //ws.send(`new client ID${clientID} connected`)
+    
     var slidin = `clientID${clientID} just joined the chat!!`;
+    var object1 = {
+        type: 'connection',
+        notif: `${slidin}`
+    }
+    socket.clients.forEach(client => {
+        console.log('sending notif')
+        client.send(JSON.stringify(object1))
+    })
+    
     function color(){
         let decimal = 1;
         for(let i=0;i<5;i++){
@@ -29,28 +35,9 @@ socket.on('connection', (ws) => {
         }
         return `#${decimal.toString(16)}`
     }
-    //console.log(`colorid of user : ${color()}`)
-
-    //ws.send('You just joined the chatroom!')
-    // ws.on('open', () =>{
-    //     // var slidin = `clientID${clientID} just joined the chat!!`
-    //     // //console.log(`sending: ${slidin}`)
-    //     // console.log(JSON.stringify(slidin))
-    //     if (this.socket.readyState == WebSocket.OPEN ) {
-    //         var slidin = `clientID${clientID} just joined the chat!!`
-    //         console.log(JSON.stringify(slidin))
-    //         // console.log('works')
-    //         // this.socket.send("works")
-    //         // this.send_data();
-    //         }
-            
-    // })
+    
     ws.on('close', ()=>console.log('client disconnected'))
     ws.on('message', data => {
-        var object1 = {
-            type: 'connection',
-            notif: `${slidin}`
-        }
         const data1 = data.toString();
         var object = {
             type: 'msg',
@@ -59,8 +46,6 @@ socket.on('connection', (ws) => {
         socket.clients.forEach(client => {
             console.log(`sending message: ${data}`)
             client.send(JSON.stringify(object))
-            console.log('sending notif')
-            client.send(JSON.stringify(object1))
         })
     })
     ws.on('error', () => console.log('websocket error')) 

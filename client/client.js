@@ -96,6 +96,8 @@ function navbar(notification){
     const dashboard = document.getElementById("notification")
     if (dashboard.innerText!= notification){
         dashboard.innerText = notification
+        space = document.createElement("br")
+        dashboard.appendChild(space)
         blank = document.createElement("div")
         blank.id = "notification"
         dashboard.appendChild(blank)
@@ -122,7 +124,6 @@ function Slide(id){
 }
 
 socket.onopen = (event) => {
-   // console.log(`${JSON.parse(event.data)}`)
     button.disabled = false
     let timer = setTimeout(inM, 2000);
     let timer1 = setTimeout(inM1, 3000);  
