@@ -97,7 +97,9 @@ function navbar(notification){
     if (dashboard.innerText!= notification){
         dashboard.innerText = notification
         blank = document.createElement("div")
+        blank.id = "notification"
         dashboard.appendChild(blank)
+        dashboard.id = "done"
     }
 }
 
