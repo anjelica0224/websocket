@@ -1,6 +1,9 @@
 const url = 'ws://localhost:443'
 
 const socket = new WebSocket(url)
+// let foo = prompt('Type here');
+// let bar = confirm('Confirm or deny');
+// console.log(foo, bar);
 
 const mytexts = document.getElementById("messages")
 const myinput = document.getElementById('input')
@@ -65,10 +68,10 @@ function Message(from, what, time, profile){
     container.appendChild(ID)
 
     const time1 = new Date(time)
-    const hour = time1.getHours()
-    if (hour < 10)  hour = '0'+hour;
-    const min = time1.getMinutes()
-    if (min < 10) min = '0'+min;
+    var hour = time1.getHours()
+    if (hour < 10)  {hour = '0'+hour;}
+    var min = (time1.getMinutes())
+    if ((min) < 10) {min = '0'+min;}
     const WHEN = document.createElement("div")
     WHEN.innerText = `${hour}:${min}`
     WHEN.setAttribute("class", "WHEN")
@@ -115,6 +118,11 @@ socket.onopen = (event) => {
 }
 socket.onmessage = (event) => {
     const topass = JSON.parse(event.data)
-    //console.log(`ClientID${(topass.prompt)}`)
-    if(topass.message != ""){Message(topass.id, topass.message, topass.date, topass.pfp)}
+    if((event.data).type == 'msg'){
+        console.log(`${(event.data).type}`)
+        if(topass.message != ""){Message(topass.id, topass.message, topass.date, topass.pfp)}
+    }
+    else{
+        console.log(`${(event.data).notif}`)
+    }
 }

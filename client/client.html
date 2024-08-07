@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WebSocket | aj</title>
+    
     <script defer src="client.js"> </script>
     <link href="client.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,6 +16,26 @@
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap" rel="stylesheet">
 </head>
 <body>
+    <script>
+        function openNav() {
+            document.getElementById("myNav").style.width = "100%";
+        }
+        function closeNav() {
+            document.getElementById("myNav").style.width = "0%";
+        }
+    </script>
+    <div class=" dashboard">
+        <div class="overlay" id="myNav">
+            <a href="javascript: void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+            <div class="overlay-content">
+                <a href="#">About</a>
+                <a href="#">Services</a>
+                <a href="#">Clients</a>
+                <a href="#">Contact</a>
+            </div>  
+        </div>
+        <span id="menu" style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
+    </div>
     <div class="wrapper">
         <header>
             <img class="background" src = "https://images.unsplash.com/photo-1520531158340-44015069e78e?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fGJsYWNrJTIwYW5kJTIwd2hpdGUlMjBjaXR5fGVufDB8fDB8fHww">
@@ -23,10 +44,10 @@
                 <br>Here's the gist: WebSockets basically create a permanent connection between your browser and this server, so messages zip back and forth in real-time, it's like a constant back-and-forth, just like a good conversation should be.
                 <br>Fast forward-this little chat space. You know, the kind where you can ditch the mainstream and actually have a conversation without the noise. Primarily for my friends, especially the ones grounded from using social media or stuck with wayy more stricter parents than mine(eye roll).
                 Also there's a slight touch of Sylvia Plath inspiration(me and my naive headspace). You know, "The Bell Jar"? A place where we can riff on ideas, dissect the world (à la Virginia Woolf, of course!). Let's see where the conversation takes us.
-            </p>
-            
+            </p>  
         </header>
-        <div class="blank"></div>
+        
+
         <div class="secondwrap">
             <div class="main">
                 <table id="container">
