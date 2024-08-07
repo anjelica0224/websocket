@@ -92,6 +92,15 @@ function Message(from, what, time, profile){
     mytexts.appendChild(box)
 }
 
+function navbar(notification){
+    const dashboard = document.getElementById("notification")
+    if (dashboard.innerText!= notification){
+        dashboard.innerText = notification
+        blank = document.createElement("div")
+        dashboard.appendChild(blank)
+    }
+}
+
 var initial = "Hey Welcome to the hub! \n This is a space for open discussion and exploration. \nFeel free to start a conversation that boggles our mind as well!\n Happy talking!"
 var initial1 = "you can start now!"
 var Server = "Server"
@@ -118,11 +127,12 @@ socket.onopen = (event) => {
 }
 socket.onmessage = (event) => {
     const topass = JSON.parse(event.data)
-    if((event.data).type == 'msg'){
-        console.log(`${(event.data).type}`)
+    if((topass).type === 'msg'){
+        console.log(`${(topass).type}`)
         if(topass.message != ""){Message(topass.id, topass.message, topass.date, topass.pfp)}
     }
     else{
-        console.log(`${(event.data).notif}`)
+        console.log(`${(topass).notif}`)
+        navbar(topass.notif)
     }
 }

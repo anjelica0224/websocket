@@ -59,8 +59,8 @@ socket.on('connection', (ws) => {
         socket.clients.forEach(client => {
             console.log(`sending message: ${data}`)
             client.send(JSON.stringify(object))
-            // console.log('sending notif')
-            // client.send(JSON.stringify(object1))
+            console.log('sending notif')
+            client.send(JSON.stringify(object1))
         })
     })
     ws.on('error', () => console.log('websocket error')) 
