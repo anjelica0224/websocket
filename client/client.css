@@ -24,6 +24,35 @@
     overflow-y: auto;
     overflow-x: hidden;
 }
+
+.sidepanel{
+    background-color: #1e2124;
+    opacity: 0.5;
+    overflow: auto;
+    display: flex;
+    flex-direction: row;
+    overflow-y: auto;
+    overflow-x: hidden;
+    width: 20%;
+    padding: 16px;
+    font-size: 20px;
+    color: gray;
+    /* font-weight: lighter; */
+    /* display: block; */
+    transition: 0.3s;
+    
+}
+#notifbar{
+    text-align: right;
+    display: flex;
+}
+#done{
+    margin-top: 10px;
+}
+#time{
+    margin-top: 10px;
+}
+
 h1{
     
     text-shadow: 10px 5px 4px grey;
@@ -54,7 +83,7 @@ p{
     margin-right: 300px;
     margin-left: 300px;
     margin-bottom: 10px;
-    font-size:smaller;
+    font-size: 20px;
 }
 
 #messages{
@@ -206,7 +235,7 @@ header {
     height : 100%;
     width : 0;
     position : fixed;
-    opacity: 0.5;
+    opacity: 0.8;
     left : 0;
     bottom : 0;
     padding : 5px;
@@ -214,7 +243,7 @@ header {
     overflow-x: hidden;
     height: 100%;
     background-color: rgba(0,0,0, 0.9); 
-    transition: 0.5s;
+    transition: 0.2s;
 }
 . overlay-content{
     position: relative;

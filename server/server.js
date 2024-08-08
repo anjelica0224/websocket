@@ -18,15 +18,18 @@ socket.on('connection', (ws) => {
     var clientID = ws._socket._handle.fd;
     console.log(`new client ID${clientID} connected `)
     
-    var slidin = `clientID${clientID} just joined the chat!!`;
+    var slidin = `clientID${clientID} just joined the chat`;
     var object1 = {
         type: 'connection',
-        notif: `${slidin}`
+        notif: `${slidin}`,
+        date: Date(),
+        id: `clientID${clientID}`
     }
     socket.clients.forEach(client => {
         console.log('sending notif')
         client.send(JSON.stringify(object1))
     })
+
     
     function color(){
         let decimal = 1;

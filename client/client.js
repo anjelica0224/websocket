@@ -92,16 +92,20 @@ function Message(from, what, time, profile){
     mytexts.appendChild(box)
 }
 
-function navbar(notification){
+function navbar(notification, time){
     const dashboard = document.getElementById("notification")
     if (dashboard.innerText!= notification){
-        dashboard.innerText = notification
-        space = document.createElement("br")
-        dashboard.appendChild(space)
+        const time1 = new Date(time)
+        var hour = time1.getHours()
+        if (hour < 10)  {hour = '0'+hour;}
+        var min = (time1.getMinutes())
+        if ((min) < 10) {min = '0'+min;}
+        dashboard.innerText = `${notification} at ${hour}:${min}`
+        
         blank = document.createElement("div")
         blank.id = "notification"
         dashboard.appendChild(blank)
-        dashboard.id = "done"
+        dashboard.id = "done"   
     }
 }
 
@@ -134,8 +138,8 @@ socket.onmessage = (event) => {
         console.log(`${(topass).type}`)
         if(topass.message != ""){Message(topass.id, topass.message, topass.date, topass.pfp)}
     }
-    else{
+    else if(topass.type === 'connection'){
         console.log(`${(topass).notif}`)
-        navbar(topass.notif)
+        navbar(topass.notif, topass.date)
     }
 }
