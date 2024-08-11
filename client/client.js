@@ -35,12 +35,9 @@ function SvgContainer(obj) {
 
 
 function Message(from, what, time, profile){
-    const box = document.createElement("div")
-    box.setAttribute("class", "box")
-
     //part1
-    const container1 = document.createElement("div")
-    container1.setAttribute("class", "firstflex")
+    // const container1 = document.createElement("div")
+    // container1.setAttribute("class", "firstflex")
     var svgParent = new SvgContainer({
         'width': 30,
         'height': 30
@@ -52,44 +49,70 @@ function Message(from, what, time, profile){
         'fill': profile
     });
     svgParent.appendChild(CIRCLE)
-    container1.appendChild(svgParent)
-    box.appendChild(container1)
+    // let menu = document.getElementById("box")
+    // let clone = menu.cloneNode(true)
+    // clone.id = box1
+    // mytexts.appendChild(clone)
+    // clone.appendChild(svgParent)
+    // let ID = document.getElementById(ID)
+    // ID.innerText = `${from}`
+    // ID.id = ID1
 
-    const BIG = document.createElement("div")
-    BIG.setAttribute("class", "BIG")
 
-    //part2
-    const container = document.createElement("div")
-    container.setAttribute("class", "secondflex")
+    let box = document.getElementById("box")
+    let clone = box.cloneNode(true)
+    
+    box.childNodes[0].appendChild(svgParent)
+    // document.getElementById("ID").innerText = box.id = "box1"`
+    box.childNodes[1][0].innerText = box.id = "box1"
+    box.childNodes[1][12].innerText = `${time}`
+    document.getElementById("MESS").innerText = `${what}`
+    box.id = "box1"
+    document.getElementById("messages").appendChild(clone)
 
-    const ID = document.createElement("span")
-    ID.innerText = `${from}`
-    ID.setAttribute("class", "ID")
-    container.appendChild(ID)
 
-    const time1 = new Date(time)
-    var hour = time1.getHours()
-    if (hour < 10)  {hour = '0'+hour;}
-    var min = (time1.getMinutes())
-    if ((min) < 10) {min = '0'+min;}
-    const WHEN = document.createElement("div")
-    WHEN.innerText = `${hour}:${min}`
-    WHEN.setAttribute("class", "WHEN")
-    container.appendChild(WHEN)
-    BIG.appendChild(container)
+
+
+    // container1.appendChild(svgParent)
+    // box.appendChild(container1)
+    // const BIG = document.createElement("div")
+    // BIG.setAttribute("class", "BIG")
+
+    // //part2
+    // const container = document.createElement("div")
+    // container.setAttribute("class", "secondflex")
+
+    // const ID = document.createElement("span")
+    // ID.innerText = `${from}`
+    // ID.setAttribute("class", "ID")
+    // container.appendChild(ID)
+
+    // const time1 = new Date(time)
+    // var hour = time1.getHours()
+    // if (hour < 10)  {hour = '0'+hour;}
+    // var min = (time1.getMinutes())
+    // if ((min) < 10) {min = '0'+min;}
+    // const WHEN = document.createElement("div")
+    // WHEN.innerText = `${hour}:${min}`
+    // WHEN.setAttribute("class", "WHEN")
+    // container.appendChild(WHEN)
+    // BIG.appendChild(container)
 
     
-    //part3
-    const container2 = document.createElement("div")
-    container2.setAttribute("class", "thirdflex")
-    const MESS = document.createElement("span")
-    MESS.innerText = `${what}`
-    MESS.setAttribute("class", "MESS")
-    container2.appendChild(MESS)
-    BIG.appendChild(container2)
+    // //part3
+    // const container2 = document.createElement("div")
+    // container2.setAttribute("class", "thirdflex")
+    // const MESS = document.createElement("span")
+    // MESS.innerText = `${what}`
+    // MESS.setAttribute("class", "MESS")
+    // container2.appendChild(MESS)
+    // BIG.appendChild(container2)
 
-    box.appendChild(BIG)
-    mytexts.appendChild(box)
+    // box.appendChild(BIG)
+    // mytexts.appendChild(box)
+
+    
+    
 }
 
 function navbar(notification, time){

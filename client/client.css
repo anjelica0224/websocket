@@ -91,7 +91,7 @@ p{
     flex-direction: column;
     flex-wrap: wrap;
 }
-.box{
+#box{
     display: flex;
     flex-direction: row;
     align-items: flex-start;
@@ -106,14 +106,29 @@ p{
     flex-wrap: nowrap;
     margin-left: 5px;
 }
-.firstflex{
+#box1{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    color:azure;
+    font-weight: lighter;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    justify-content: flex-start;
+    border-radius: 10px;
+    /*border: 2px solid #dedede;*/
+    padding: 10px;
+    margin: 10px 0;
+    flex-wrap: nowrap;
+    margin-left: 5px;
+}
+#firstflex{
     align-self: flex-start;
     margin-top: 5px;
 }
-.ID{
+#ID{
     font-weight: normal;
 }
-.WHEN{
+#WHEN{
     font-weight: lighter;
     font-size: smaller;
     color: dimgray;
