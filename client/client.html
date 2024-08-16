@@ -49,7 +49,20 @@
                 <table id="container">
                     <tr>
                         <td valign="top">
-                            <div id="messages"></div>
+                            <div id="messages">
+                                <div id="box">
+                                    <div id="firstflex"></div>
+                                    <div class="BIG">
+                                        <div class="secondflex">
+                                            <div id="ID"></div>
+                                            <div id="WHEN"></div>
+                                        </div>
+                                        <div class="thirdflex">
+                                            <span id="MESS"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </td>
                     </tr>
                     <tr>
@@ -57,7 +70,16 @@
                             <div class="bottom">
                                 <input type="text" id="input" placeholder="Type your message here">
                                 <div class="space"></div>
-                                <span id="send">Send</span>
+                                <button id="send">Send</button>
+                                <script>
+                                    var input = document.getElementById("input");
+                                    input.addEventListener("keypress", function(event) {
+                                      if (event.key === "Enter") {
+                                        event.preventDefault();
+                                        document.getElementById("send").click();
+                                      }
+                                    });
+                                    </script>
                             </div> 
                         </td>
                     </tr>
