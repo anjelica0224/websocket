@@ -70,7 +70,16 @@
                             <div class="bottom">
                                 <input type="text" id="input" placeholder="Type your message here">
                                 <div class="space"></div>
-                                <span id="send">Send</span>
+                                <button id="send">Send</button>
+                                <script>
+                                    var input = document.getElementById("input");
+                                    input.addEventListener("keypress", function(event) {
+                                      if (event.key === "Enter") {
+                                        event.preventDefault();
+                                        document.getElementById("send").click();
+                                      }
+                                    });
+                                    </script>
                             </div> 
                         </td>
                     </tr>
