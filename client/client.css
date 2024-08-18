@@ -24,7 +24,7 @@
     overflow-y: auto;
     overflow-x: hidden;
 }
-
+/* 
 .sidepanel{
     background-color: #1e2124;
     opacity: 0.5;
@@ -39,19 +39,19 @@
     color: gray;
     /* font-weight: lighter; */
     /* display: block; */
-    transition: 0.3s;
+    /*transition: 0.3s;
     
-}
-#notifbar{
+} */
+/* #notifbar{
     text-align: right;
     display: flex;
-}
-#done{
+} */
+/* #done{
     margin-top: 10px;
 }
 #time{
     margin-top: 10px;
-}
+} */
 
 h1{
     
@@ -132,6 +132,13 @@ p{
     font-weight: lighter;
     font-size: smaller;
     color: dimgray;
+    /*align-self: flex-end;*/
+    margin-left: 10px;
+}
+#timejoining{
+    font-weight: lighter;
+    font-size: smaller;
+    color: grey;
     /*align-self: flex-end;*/
     margin-left: 10px;
 }
@@ -298,6 +305,10 @@ header {
     right: 45px;
     font-size: 60px;
 }
+#hi{
+    position: fixed;
+}
+
 /*
 @media screen and (max-height: 450px) {
     .overlay a {font-size: 20px}
