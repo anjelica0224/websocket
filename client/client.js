@@ -66,37 +66,6 @@ function Message(from, what, time, profile){
     box.id = 'box1'
     document.getElementById('messages').appendChild(clone)
 }
-// function Notif(notif, time){
-//     let box = document.getElementById("joining")
-//     let clone = box.cloneNode(true)
-//     if(box.children[0] != notif){
-//         box.children[0].innerText = `${notif}.`
-//         box.children[1].innerText = `${timeformat(time)}`
-//         box.id = 'box1'
-//         document.getElementById('sidepanel').appendChild(clone)
-//     }
-// }
-
-
-
-// function navbar(notification, time){
-//     const dashboard = document.getElementById('notifbar')
-//     const notif = dashboard.children[0]
-//     const timejoining = dashboard.children[1]
-//     let clone = dashboard.cloneNode(true)
-//     // let box = document.getElementById("notifbar")
-//     // let clone = box.cloneNode(true)
-//     // if (notif.innerText!= notification){
-//     notif.innerText = `${notification}`
-//     timejoining.innerText = `${timeformat(time)}`
-//     dashboard.id = '1'
-//     // box.children[1].children[0].children[1].innerText = `${timeformat(time)}`
-//     // box.children[0].innerText = `${notification}.`
-//     // box.children[1].innerText = `${timeformat(time)}`
-//     // box.id = 'box1'
-//     document.getElementById('sidepanel').appendChild(clone)
-//     // }
-// }
 
 var initial = "Hey Welcome to the hub! \n This is a space for open discussion and exploration. \nFeel free to start a conversation that boggles our mind as well!\n Happy talking!"
 var initial1 = "you can start now!"

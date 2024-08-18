@@ -17,8 +17,7 @@ const socket = new WebSocketServer({port: 443})
 socket.on('connection', (ws) => {
     var clientID = ws._socket._handle.fd;
     console.log(`new client ID${clientID} connected `)
-    
-    var slidin = `clientID${clientID} just joined the chat`;
+    var slidin = `clientID${clientID} just joined the chat!`;
     var object1 = {
         type: 'connection',
         notif: `${slidin}`,
