@@ -3,16 +3,19 @@ const fs = require ('fs')
 const http = require('http')
 //const {Buffer} = require('buffer')
 //import { Buffer } from 'buffer';
-http.createServer((req,res) => {
-    const content = fs.readFileSync('client/index.html', 'utf-8')
+const server = http.createServer((req,res) => {
+    const content = fs.readFileSync('/client/index.html', 'utf-8')
     res.setHeader("Content-Type", "text/html");
     res.writeHead(200);
     res.end('content')
 })
-.listen(5500, () => console.log(`Listening on ${5500}`));
+const PORT = process.env.PORT || 443;
+server.listen(PORT, () => console.log(`HTTP Server listening on ${PORT}`));
 
-const ws_port = process.env.PORT || 443;
-const socket = new WebSocketServer({port: ws_port})
+// server.listen(5500, () => console.log(`Listening on ${5500}`));
+
+// const ws_port = process.env.PORT || 443;
+const socket = new WebSocketServer({server})
 socket.on('connection', (ws) => {
     var clientID = ws._socket._handle.fd;
     console.log(`new client ID${clientID} connected `)
