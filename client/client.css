@@ -228,7 +228,7 @@ header {
     opacity: 0.8;
     left : 0;
     bottom : 0;
-    padding : 5px;
+    padding : 1px;
     z-index : 1;
     overflow-x: hidden;
     height: 100%;
@@ -276,7 +276,19 @@ header {
 #hi{
     position: fixed;
 }
-
+.username {
+    color: azure;
+    font-weight: lighter;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    margin-left: 10px;
+    background-color: #1e2124;
+    opacity: 0.4;
+    /* width: fit-content; */
+    height: max-content;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 30px;
+}
 /*
 @media screen and (max-height: 450px) {
     .overlay a {font-size: 20px}
