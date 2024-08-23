@@ -1,5 +1,5 @@
 // const url = 'ws://localhost:443'
-const url = 'https://websocket-serverrr.onrender.com'
+const url = 'wss://websocket-serverrr.onrender.com'
 const socket = new WebSocket(url)
 // let foo = prompt('Type here');
 // let bar = confirm('Confirm or deny');
