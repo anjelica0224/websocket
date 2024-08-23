@@ -1,18 +1,26 @@
 const {WebSocketServer} = require('ws')
 const fs = require ('fs')
 const http = require('http')
+const path = require('path');  
 //const {Buffer} = require('buffer')
 //import { Buffer } from 'buffer';
-const server = http.createServer((req,res) => {
+const server = http.createServer((req, res) => {
     const indexPath = path.join(__dirname, '..', 'client', 'index.html');
-    const content = fs.readFileSync(indexPath, 'utf-8')
-    res.setHeader("Content-Type", "text/html");
-    res.writeHead(200);
-    res.end(content)
-})
+    fs.readFile(indexPath, 'utf-8', (err, content) => {
+        if (err) {
+            console.error('Error reading index.html:', err);
+            res.writeHead(500, { "Content-Type": "text/plain" });
+            res.end("Internal Server Error");
+            return;
+        }
+        res.setHeader("Content-Type", "text/html");
+        res.writeHead(200);
+        res.end(content);
+    });
+});
+
 const PORT = process.env.PORT || 443;
 server.listen(PORT, () => console.log(`HTTP Server listening on ${PORT}`));
-
 // server.listen(5500, () => console.log(`Listening on ${5500}`));
 
 // const ws_port = process.env.PORT || 443;
