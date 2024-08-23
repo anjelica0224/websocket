@@ -4,10 +4,11 @@ const http = require('http')
 //const {Buffer} = require('buffer')
 //import { Buffer } from 'buffer';
 const server = http.createServer((req,res) => {
-    const content = fs.readFileSync('./client/index.html', 'utf-8')
+    const indexPath = path.join(__dirname, '..', 'client', 'index.html');
+    const content = fs.readFileSync(indexPath, 'utf-8')
     res.setHeader("Content-Type", "text/html");
     res.writeHead(200);
-    res.end('content')
+    res.end(content)
 })
 const PORT = process.env.PORT || 443;
 server.listen(PORT, () => console.log(`HTTP Server listening on ${PORT}`));
