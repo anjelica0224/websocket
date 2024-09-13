@@ -3,7 +3,9 @@ WebSocket-Based Chat Application
 This project demonstrates a simple WebSocket-powered chat application. It establishes a persistent, bi-directional connection between a client and a server, allowing real-time communication similar to a chat room.
 
 Bi-directional communication: Messages can be sent from both the client and the server.
+
 Persistent connection: The connection remains open, enabling real-time updates.
+
 Multi-user support: Multiple clients can connect to the server simultaneously.
 
 Chat-server link - https://anjelica0224.github.io/websocket/ 
