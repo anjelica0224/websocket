@@ -5,18 +5,8 @@ const path = require('path');
 //const {Buffer} = require('buffer')
 //import { Buffer } from 'buffer';
 const server = http.createServer((req, res) => {
-    const indexPath = path.join(__dirname, '..', 'client', 'index.html');
-    fs.readFile(indexPath, 'utf-8', (err, content) => {
-        if (err) {
-            console.error('Error reading index.html:', err);
-            res.writeHead(500, { "Content-Type": "text/plain" });
-            res.end("Internal Server Error");
-            return;
-        }
-        res.setHeader("Content-Type", "text/html");
-        res.writeHead(200);
-        res.end(content);
-    });
+  res.writeHead(301, { "Location": "https://anjelica0224.github.io/websocket/" });
+  res.end();
 });
 
 const PORT = process.env.PORT || 443;
