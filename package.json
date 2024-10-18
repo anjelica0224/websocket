@@ -1,11 +1,13 @@
 {
   "name": "websocket-server",
   "version": "1.0.0",
-  "main": "server.js",
+  "main": "./server/server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node ./server/server.js"
   },
-  
+  "engines": {
+    "node": "20.x"
+  },
   "dependencies": {
     "buffer": "^6.0.3",
     "node": "^18.20.4",
@@ -14,5 +16,4 @@
     "socket.io-client": "^4.7.5",
     "ws": "^8.18.0"
   }
-  
 }
