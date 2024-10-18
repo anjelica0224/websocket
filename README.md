@@ -8,8 +8,8 @@ Persistent connection: The connection remains open, enabling real-time updates.
 
 Multi-user support: Multiple clients can connect to the server simultaneously.
 
-Chat-server link - https://anjelica0224.github.io/websocket/ 
-Daily time limit for the link: Due to the lack of a domain name, the connection is subject to a 5-minute daily time limit.
+Chat-server link - https://aj-websocket.foo.ng
+
 
 Usage:
 1. Clone the repository: `git clone https://github.com/anjelica0224/websocket.git`
