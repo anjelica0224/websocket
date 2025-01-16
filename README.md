@@ -6,9 +6,15 @@ Bi-directional communication: Messages can be sent from both the client and the 
 
 Persistent connection: The connection remains open, enabling real-time updates.
 
-Multi-user support: Multiple clients can connect to the server simultaneously.
+Multi-user support: Multiple clients can connect to the server simultaneously, with random colors assigned to thier profiles!
 
 Chat-server link - https://aj-websocket.foo.ng
+
+<div style="display: flex; justify-content: space-between;">
+  <img width="700" alt="image1" src="https://github.com/user-attachments/assets/78400b8e-473a-4467-86b3-bec59e1d84b0" />
+  <img width="700" alt="image2" src="https://github.com/user-attachments/assets/ff63aeb1-5008-4e5a-bf10-17bb63e9383f" />
+</div>
+
 
 
 Usage:
