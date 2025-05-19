@@ -1,0 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Cinzel:wght@400..900&display=swap');
+
+@import "tailwindcss";
+@theme{
+    --font-caveat: Caveat, "sans-serif";
+    --font-cinzel: Cinzel, "sans-serif";
+    --color-wheat: #fff5ee;
+}
+
+.myshadow{
+    text-shadow: 10px 5px 4px grey;
+}
+
