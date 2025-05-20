@@ -5,9 +5,16 @@
     --font-caveat: Caveat, "sans-serif";
     --font-cinzel: Cinzel, "sans-serif";
     --color-wheat: #fff5ee;
+    --color-cinder: #1e2124;
+    --color-fade: #333;
+    --color-azure: #f0ffff;
 }
 
 .myshadow{
     text-shadow: 10px 5px 4px grey;
 }
+.bgmysize{
+    background-size: 100% 100%;
+}
+
 
