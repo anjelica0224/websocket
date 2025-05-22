@@ -3,8 +3,7 @@ import Home from './components/home'
 import Overlay from './components/overlay'
 import ChatWindow from './components/chatWindow'
 function App() {
-  const [isOverlayOpen, setIsOverlayOpen] = useState(0)
-  console.log(isOverlayOpen)
+  const [isOverlayOpen, setIsOverlayOpen] = useState(false)
   return (
     <>
     <Home openOverlayFn={()=> setIsOverlayOpen(!isOverlayOpen)} />
