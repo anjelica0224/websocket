@@ -49,17 +49,24 @@ export default function ChatWindow(){
     scrollToBottom()
   }, [messages]);
 
-
-
   return(
     <div className="h-screen w-full bg-[url(https://i.pinimg.com/736x/8e/1c/18/8e1c18e08df9e22ede87d3fb438c8b18.jpg)] bg-no-repeat bg-fixed bgmysize px-8 pt-12 pb-32 md:pb-28">
       <div className="bg-cinder/70 w-full h-full rounded-4xl max-w-lg mx-auto flex flex-col pb-4 px-2 ">
-        <div className="flex flex-col pt-2 px-4 grow overflow-y-scroll">
+        <div className="flex flex-col py-2 px-4 rounded-4xl grow overflow-y-scroll">
           {messages.map((item, idx) => <Message key={idx} name={item.name} >{item.text}</Message>)}
           <div ref={endMessage}/>
         </div>
         <div className="flex bg-fade/50 p-2 rounded-4xl">
-          <Input value={input} onChange={handleEvent} onKeyDown={(e) => {if (e.key === "Enter") handleSend();}}/>
+          <Input
+            value={input}
+            onChange={handleEvent}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                e.preventDefault();
+                handleSend();
+              }
+            }}
+          />
           <Send onSend={handleSend} />
         </div>
       </div>
