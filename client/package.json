@@ -12,6 +12,8 @@
   "dependencies": {
     "@phosphor-icons/react": "^2.1.8",
     "@tailwindcss/vite": "^4.1.7",
+    "bandname": "^1.0.0",
+    "nanoid": "^5.1.5",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-nice-avatar": "^1.5.0",

@@ -1,8 +1,7 @@
 import { useRef, useState } from "react";
 
-export default function Input ({ maxRows = 5 }) {
+export default function Input ({ maxRows = 5, ...props }) {
   const textareaRef = useRef(null);
-  const [value, setValue] = useState("");
 
   const handleChange = (e) => {
     const textarea = textareaRef.current;
@@ -24,12 +23,11 @@ export default function Input ({ maxRows = 5 }) {
   return (
     <textarea
       ref={textareaRef}
-      value={value}
-      onChange={handleChange}
       rows={1}
-      className="text-sm md:text-lg text-[whitesmoke]/50 flex grow outline-none self-center ml-2"
+      className="text-sm md:text-lg text-[whitesmoke]/50 grow outline-none self-center ml-2"
       style={{ lineHeight: "1.5rem", maxHeight: `${1.5 * maxRows}rem` }} // 1.5rem is approx 24px
       placeholder="Type something..."
+      {...props}
     />
   );
 };

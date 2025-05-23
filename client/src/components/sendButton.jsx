@@ -1,7 +1,7 @@
 import { PaperPlaneTiltIcon } from "@phosphor-icons/react"
-export default function Send(){
+export default function Send({ onSend }){
   return(
-    <PaperPlaneTiltIcon size={32} className="p-2 opacity-70 md:p-1 items-end-safe text-gray-300"  />
+    <PaperPlaneTiltIcon className="size-9 shrink-0 p-2 opacity-70 md:p-1 items-end text-gray-300" onClick={onSend} />
   )
   
 }
