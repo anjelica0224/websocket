@@ -8,9 +8,9 @@ export default function Message({children, date, name}){
             <div className="flex flex-col font-['Gill_Sans','Gill_Sans_MT',Calibri,'Trebuchet_MS',sans-serif] p-2">
                 <div className="flex justify-start">
                     <span className="font-normal pr-2  text-azure">{name}</span>
-                    <span className="text-sm pt-0.5 text-gray-500 ">13:10</span>
+                    <span className="text-sm pt-0.5 text-gray-500 ">{date}</span>
                 </div>
-                <div className="flex text-azure font-light self-start">{children}</div>
+                <div className="flex flex-col text-azure font-light self-start">{children}</div>
             </div>
         </div>
     )

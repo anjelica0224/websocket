@@ -2,6 +2,7 @@ import { useState } from 'react'
 import Home from './components/home'
 import Overlay from './components/overlay'
 import ChatWindow from './components/chatWindow'
+
 function App() {
   const [isOverlayOpen, setIsOverlayOpen] = useState(false)
   return (
@@ -16,7 +17,6 @@ function App() {
       </p>  
     </Overlay>
     <ChatWindow/>
-    
     </>
   )
 }
