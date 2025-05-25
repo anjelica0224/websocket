@@ -11,23 +11,26 @@ server.listen(PORT, () => console.log(`HTTP Server listening on ${PORT}`));
 const socket = new WebSocketServer({server})
 socket.on('connection', (ws) => {
     console.log('Client connected');
-    // const joinMsg = {
-    //     type: 'connection',
-    //     name: 'Server',
-    //     date: new Date(),
-    //     message: `hi i just joined the chat!`
-    // };
-    // broadcast(joinMsg)
+    
     
     ws.on('message', data => {
-        const data1 = data.toString();
-        const chatMsg = {
-            type: 'msg',
-            name: 'Server',
-            date: new Date(),
-            message: data1
-        };
-        broadcast(chatMsg);
+      const data1 = data.toString();
+      const chatMsg = {
+          type: 'msg',
+          name: 'Server',
+          date: new Date(),
+          message: data1
+      };
+      broadcast(chatMsg);
+      const joinMsg = {
+        type: 'mine',
+        date: new Date(),
+        message: data1
+      };
+      console.log(joinMsg)
+      broadcast(joinMsg);
+      
+
     })
     ws.on('close', ()=>console.log('client disconnected'))
     ws.on('error', () => console.log('websocket error')) 
@@ -36,6 +39,14 @@ socket.on('connection', (ws) => {
 function broadcast(obj) {
   const data = JSON.stringify(obj);
   socket.clients.forEach(client => {
+    console.log(`sending message: ${data}`)
+    client.send(JSON.stringify(obj))
+  })
+}
+function broadcastNotMe(obj, sender){
+  const data = JSON.stringify(obj);
+  socket.clients.forEach(client => {
+    if (client === sender) return;
     console.log(`sending message: ${data}`)
     client.send(JSON.stringify(obj))
   })

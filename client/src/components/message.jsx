@@ -1,7 +1,8 @@
 import Avatar, { genConfig } from 'react-nice-avatar'
 
-export default function Message({children, date, name}){
-    const config = genConfig(name) 
+export default function Message({children, date, name, id}){
+    const unique = `${name} ${id}`
+    const config = genConfig(unique) 
     return(
         <div className="flex items-start justify-start">
             <Avatar className="mt-4 size-10 shrink-0"  {...config} />

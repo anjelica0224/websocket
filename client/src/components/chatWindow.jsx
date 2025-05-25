@@ -33,6 +33,14 @@ export default function ChatWindow(){
   } = useWebSocket(socketUrl, {
     onOpen: () => {
       console.log('WebSocket connection established')
+      if (name){
+        sendJsonMessage({
+          id,
+          name,
+          date: new Date(),
+          text: `${name} just joined the chat`
+        })
+      }
     },
     onClose: () => {
       console.log('WebSocket connection closed')
@@ -52,6 +60,22 @@ export default function ChatWindow(){
         console.log(`Processing message:`, topass.message)
         const messageData = JSON.parse(topass.message)
         setMessages(prev => [...prev, messageData])
+      }
+      if(topass.type === 'mine'){
+        console.log(`Processing notif:`, topass.message)
+        const messageData = JSON.parse(topass.message)
+        console.log(messageData)
+        // console.log(messageData.id)
+        // messageData.id = 'server'
+        // messageData.name = 'Server'
+        // setMessages(prev => [...prev, messageData])
+        // return;
+        setMessages(prev => [...prev, {
+          id: 'server',
+          name: 'Server',
+          date: new Date(),
+          text: `${messageData.name} just joined the chat`
+        }])
       }
     }
   }, [lastMessage]);
@@ -85,7 +109,7 @@ export default function ChatWindow(){
         <div className="flex flex-col py-2 px-4 rounded-4xl grow overflow-y-scroll">
           {/* {messages.map((item, idx) => <Message key={idx} name={item.name}> {item.text} </Message>)} */}
           {messages.map((item, idx) => (
-            <Message key={idx} name={item.name}>
+            <Message key={idx} name={item.name} id={item.id}>
               {item.text.split('\n').map((line, i) => (
                 <div key={i}>{line || '\u00A0'}</div>
               ))}
