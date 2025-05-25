@@ -38,8 +38,10 @@ export default function ChatWindow(){
           id,
           name,
           date: new Date(),
-          text: `${name} just joined the chat`
+          text: `${name} just joined the chat`,
+          type: 'mine'
         })
+        console.log('why')
       }
     },
     onClose: () => {
@@ -52,24 +54,28 @@ export default function ChatWindow(){
   });
 
   useEffect(() => {
-    if (lastMessage !== null) {
-      const topass = JSON.parse(lastMessage.data)
-      console.log(`Received:`, topass)
-      
-      if(topass.type === 'msg'){
-        console.log(`Processing message:`, topass.message)
-        const messageData = JSON.parse(topass.message)
-        setMessages(prev => [...prev, messageData])
-      }
-      if(topass.type === 'mine'){
-        console.log(`Processing notif:`, topass.message)
-        const messageData = JSON.parse(topass.message)
-        console.log(messageData)
-        // console.log(messageData.id)
-        // messageData.id = 'server'
-        // messageData.name = 'Server'
-        // setMessages(prev => [...prev, messageData])
-        // return;
+  if (lastMessage !== null) {
+    const topass = JSON.parse(lastMessage.data)
+    console.log(`Received:`, topass)
+    
+    if(topass.type === 'msg'){
+      console.log(`Processing message:`, topass.message)
+      const messageData = JSON.parse(topass.message)
+      setMessages(prev => [...prev, messageData])
+    } 
+    else if(topass.type === 'mine'){
+      console.log(`Processing notif:`, topass.message)
+      const messageData = JSON.parse(topass.message)
+      const joinText = `${messageData.name} just joined the chat`
+      const isDuplicate = messages.some(msg => 
+        msg.name === 'Server' && 
+        msg.text === joinText
+      )
+      console.log(messages.some(msg => 
+        msg.name === 'Server' && 
+        msg.text === joinText
+      ))
+      if (!isDuplicate){
         setMessages(prev => [...prev, {
           id: 'server',
           name: 'Server',
@@ -78,7 +84,8 @@ export default function ChatWindow(){
         }])
       }
     }
-  }, [lastMessage]);
+  }
+}, [lastMessage]);
  
   // console.log(input)
   function handleEvent(e) {
@@ -87,11 +94,13 @@ export default function ChatWindow(){
 
   function handleSend() {
     if (input === "" || readyState !== ReadyState.OPEN) return
+    console.log('handleSend')
     sendJsonMessage({
       id,
       name,
       date: new Date(),
-      text: input
+      text: input,
+      type: 'msg'
     });
     setInput("");
   }
