@@ -36,8 +36,7 @@ socket.on('connection', (ws) => {
 function broadcast(obj) {
   const data = JSON.stringify(obj);
   socket.clients.forEach(client => {
-    if (client !== socket && client.readyState === 1) {
-      client.send(data);
-    }
-  });
+    console.log(`sending message: ${data}`)
+    client.send(JSON.stringify(obj))
+  })
 }

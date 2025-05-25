@@ -7,11 +7,11 @@ import Send from "./sendButton"
 import useWebSocket, { ReadyState } from 'react-use-websocket';
 
 export default function ChatWindow(){
+  const socketUrl = 'ws://127.0.0.1:443'
   const [input, setInput] = useState("")
   const endMessage = useRef(null)
   const [name, ] = useState(() => bandname())
   const [id, ] = useState(() => nanoid())
-  const [ws, setWs] = useState(null);
   const [messages, setMessages] = useState(() => ([
     {
       id: "server",
@@ -26,6 +26,35 @@ export default function ChatWindow(){
       text: `${name} just joined the chat`
     }
   ]))
+  const { 
+    sendJsonMessage, 
+    lastMessage, 
+    readyState 
+  } = useWebSocket(socketUrl, {
+    onOpen: () => {
+      console.log('WebSocket connection established')
+    },
+    onClose: () => {
+      console.log('WebSocket connection closed')
+    },
+    onError: (error) => {
+      console.error('WebSocket error:', error)
+    },
+    share: true
+  });
+
+  useEffect(() => {
+    if (lastMessage !== null) {
+      const topass = JSON.parse(lastMessage.data)
+      console.log(`Received:`, topass)
+      
+      if(topass.type === 'msg'){
+        console.log(`Processing message:`, topass.message)
+        const messageData = JSON.parse(topass.message)
+        setMessages(prev => [...prev, messageData])
+      }
+    }
+  }, [lastMessage]);
  
   // console.log(input)
   function handleEvent(e) {
@@ -33,16 +62,14 @@ export default function ChatWindow(){
   }
 
   function handleSend() {
-    if (input === "") return
-    if(ws) {
-      ws.send(JSON.stringify({
-        id,
-        name,
-        date: new Date(),
-        text: input
-      })) 
-    }
-    
+    if (input === "" || readyState !== ReadyState.OPEN) return
+    sendJsonMessage({
+      id,
+      name,
+      date: new Date(),
+      text: input
+    });
+    setInput("");
   }
 
   const scrollToBottom = () => {
@@ -51,34 +78,6 @@ export default function ChatWindow(){
   useEffect(() => {
     scrollToBottom()
   }, [messages]);
-
-  useEffect(() => {
-    const websocket = new WebSocket('ws://127.0.0.1:443');
-
-    websocket.onopen = () => {
-        console.log('WebSocket is connected');
-        // Generate a unique client ID
-    };
-
-    websocket.onmessage = (event) => {
-      const topass = JSON.parse(event.data)
-      console.log(`${topass.message}`)
-      // setMessages(prev => prev.concat(topass))
-      if((topass).type === 'msg'){
-          console.log(`hello ${topass.message}`)
-          setMessages(prev => prev.concat(JSON.parse(topass.message)))
-          setInput("")
-      }
-      // else if(topass.type === 'connection'){
-      //     console.log(`bbye ${topass.message}`) 
-      //     setMessages(prev => prev.concat(JSON.parse(topass.message)))
-      //     setInput("")
-      // }
-    }
-    setWs(websocket);
-  }, []);
-
-  
 
   return(
     <div className="h-screen w-full bg-[url(https://i.pinimg.com/736x/8e/1c/18/8e1c18e08df9e22ede87d3fb438c8b18.jpg)] bg-no-repeat bg-fixed bgmysize px-8 pt-12 pb-32 md:pb-28">
