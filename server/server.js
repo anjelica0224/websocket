@@ -12,7 +12,7 @@ server.listen(PORT, () => console.log(`HTTP Server listening on ${PORT}`));
 const socket = new WebSocketServer({server})
 socket.on('connection', (ws) => {
   console.log('Client connected');
-  ws.on('message', data => {
+  ws.on('message', (data, isBinary) => {
     console.log(data)
     const data1 = data.toString();
     console.log(` data1 ${data1}`)

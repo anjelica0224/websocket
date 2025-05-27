@@ -1,9 +1,11 @@
 import { nanoid } from 'nanoid'
 import bandname from "bandname"
+import { PlusCircleIcon } from "@phosphor-icons/react"
 import { useState, useEffect, useRef } from "react"
 import Input from "./input"
 import Message from "./message"
 import Send from "./sendButton"
+import Media from "./media"
 import useWebSocket, { ReadyState } from 'react-use-websocket';
 
 export default function ChatWindow(){
@@ -67,14 +69,11 @@ export default function ChatWindow(){
       console.log(`Processing notif:`, topass.message)
       const messageData = JSON.parse(topass.message)
       const joinText = `${messageData.name} just joined the chat`
+      console.log(` join--${joinText}`)
       const isDuplicate = messages.some(msg => 
         msg.name === 'Server' && 
         msg.text === joinText
       )
-      console.log(messages.some(msg => 
-        msg.name === 'Server' && 
-        msg.text === joinText
-      ))
       if (!isDuplicate){
         setMessages(prev => [...prev, {
           id: 'server',
@@ -104,6 +103,13 @@ export default function ChatWindow(){
     });
     setInput("");
   }
+  // function sendBinaryData() {
+  //   if (readyState === ReadyState.OPEN) {
+  //     sendMessage(imageData);
+  //   } else {
+  //     console.error("WebSocket connection not open!");
+  //   }
+  // }
 
   const scrollToBottom = () => {
     endMessage.current?.scrollIntoView({ behavior: "smooth" })
@@ -111,6 +117,14 @@ export default function ChatWindow(){
   useEffect(() => {
     scrollToBottom()
   }, [messages]);
+
+  const [file, setFile] = useState([]);
+  const inputFile = useRef(null);
+
+  const handleChange = (e) => {
+    setFile([...file, e.target.files[0]]);
+    console.log(file)
+  };
 
   return(
     <div className="h-screen w-full bg-[url(https://i.pinimg.com/736x/8e/1c/18/8e1c18e08df9e22ede87d3fb438c8b18.jpg)] bg-no-repeat bg-fixed bgmysize px-8 pt-12 pb-32 md:pb-28">
@@ -127,6 +141,11 @@ export default function ChatWindow(){
           <div ref={endMessage}/>
         </div>
         <div className="flex bg-fade/50 p-2 rounded-4xl">
+          <PlusCircleIcon className="size-9 shrink-0 p-2 mt-1 mb-1 ml-1 opacity-70 md:p-1 text-gray-300" onClick={() => inputFile.current.click()}  />
+          <input type="file" onChange={handleChange} ref={inputFile} multiple={true}
+          // style={{ display: 'none' }}
+          >
+          </input>
           <Input
             value={input}
             onChange={handleEvent}

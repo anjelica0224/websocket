@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@phosphor-icons/react": "^2.1.8",
+    "@progress/kendo-react-upload": "^11.0.0",
     "@tailwindcss/vite": "^4.1.7",
     "bandname": "^1.0.0",
     "nanoid": "^5.1.5",
