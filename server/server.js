@@ -21,8 +21,6 @@ socket.on('connection', (ws) => {
     if (parsedData.type === 'msg') {
       const chatMsg = {
         type: 'msg',
-        name: 'Server',
-        date: new Date(),
         message: data1
       };
       broadcast(chatMsg);
@@ -30,7 +28,6 @@ socket.on('connection', (ws) => {
     else if (parsedData.type === 'mine') {
       const joinMsg = {
         type: 'mine',
-        date: new Date(),
         message: data1
       };
       broadcast(joinMsg);

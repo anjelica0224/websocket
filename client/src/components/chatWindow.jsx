@@ -1,11 +1,11 @@
 import { nanoid } from 'nanoid'
 import bandname from "bandname"
-import { PlusCircleIcon } from "@phosphor-icons/react"
+import { PlusCircleIcon} from "@phosphor-icons/react"
 import { useState, useEffect, useRef } from "react"
 import Input from "./input"
 import Message from "./message"
 import Send from "./sendButton"
-import Media from "./media"
+import Preview from './preview'
 import useWebSocket, { ReadyState } from 'react-use-websocket';
 
 export default function ChatWindow(){
@@ -14,8 +14,8 @@ export default function ChatWindow(){
   const endMessage = useRef(null)
   const [name, ] = useState(() => bandname())
   const [id, ] = useState(() => nanoid())
-  const [file, setFile] = useState([]);
-  const inputFile = useRef(null);
+  const [file, setFile] = useState([])
+  const inputFile = useRef(null)
   const [messages, setMessages] = useState(() => ([
     {
       id: "server",
@@ -52,46 +52,48 @@ export default function ChatWindow(){
   });
 
   useEffect(() => {
-  if (lastMessage !== null) {
-    const topass = JSON.parse(lastMessage.data)
-    console.log(`Received:`, topass)
-    
-    if(topass.type === 'msg'){
-      console.log(`Processing message:`, topass.message)
-      const messageData = JSON.parse(topass.message)
-      setMessages(prev => [...prev, messageData])
-    } 
-    else if(topass.type === 'mine'){
-      console.log(`Processing notif:`, topass.message)
-      const messageData = JSON.parse(topass.message)
-      const joinText = `${messageData.name} just joined the chat`
-      console.log(` join--${joinText}`)
-      setMessages(prev => [...prev, {
-        id: 'server',
-        name: 'Server',
-        date: new Date(),
-        text: `${messageData.name} just joined the chat`
-      }])
-    
+    if (lastMessage !== null) {
+      const topass = JSON.parse(lastMessage.data)
+      console.log(`Received:`, topass)
+      
+      if(topass.type === 'msg'){
+        console.log(`Processing message:`, topass.message)
+        const messageData = JSON.parse(topass.message)
+        setMessages(prev => [...prev, messageData])
+        setFile(messageData.media)
+      } 
+      else if(topass.type === 'mine'){
+        console.log(`Processing notif:`, topass.message)
+        const messageData = JSON.parse(topass.message)
+        const joinText = `${messageData.name} just joined the chat`
+        console.log(` join--${joinText}`)
+        setMessages(prev => [...prev, {
+          id: 'server',
+          name: 'Server',
+          date: new Date(),
+          text: `${messageData.name} just joined the chat`
+        }])
+      }
     }
-  }
-}, [lastMessage]);
+  }, [lastMessage]);
  
   function handleInputEvent(e) {
     setInput(e.target.value)
   }
 
   function handleSend() {
-    if (input === "" || readyState !== ReadyState.OPEN) return
+    if ((input === "" && !file )|| readyState !== ReadyState.OPEN) return
     console.log('handleSend')
     sendJsonMessage({
       id,
       name,
       date: new Date(),
       text: input,
-      type: 'msg'
+      type: 'msg',
+      media: file
     });
     setInput("");
+    setFile([]);
   }
 
   const scrollToBottom = () => {
@@ -101,11 +103,31 @@ export default function ChatWindow(){
     scrollToBottom()
   }, [messages]);
 
-
   const handleFileChange = (e) => {
-    setFile([...file, e.target.files[0]]);
-    console.log(file)
-  };
+    const uploaded = e.target.files
+    for(let i=0; i<uploaded.length; i++){
+      new Promise(resolve => {
+        let baseURL = ""
+        let reader = new FileReader()
+        reader.readAsDataURL(e.target.files[i])
+        reader.onload = () => {
+          console.log("Called", reader)
+          baseURL = reader.result
+          setFile(prev => [...prev, baseURL])
+          resolve(baseURL)
+        }
+      })  
+    }
+  }
+
+  const remove = (idx) => {
+    setFile(prev => prev.filter((_, indx) => indx !== idx))  
+  }
+
+  const uploadFile = (e) => {
+    e.preventDefault()
+    inputFile.current.click()
+  }
 
   return(
     <div className="h-screen w-full bg-[url(https://i.pinimg.com/736x/8e/1c/18/8e1c18e08df9e22ede87d3fb438c8b18.jpg)] bg-no-repeat bg-fixed bgmysize px-8 pt-12 pb-32 md:pb-28">
@@ -117,13 +139,37 @@ export default function ChatWindow(){
               {item.text.split('\n').map((line, i) => (
                 <div key={i}>{line || '\u00A0'}</div>
               ))}
+              {item.media && item.media.length > 0 && (
+                <div className="mt-2 flex flex-wrap">
+                  {item.media.map((mediaFile, mediaIdx) => (
+                    <Preview key={mediaIdx} srcFile={mediaFile} />
+                  ))}
+                </div>
+              )}
             </Message>
           ))}
           <div ref={endMessage}/>
         </div>
+
+        {file.length > 0 && (
+          <div className="px-4 py-2">
+            <div className="bg-gray-100/20 rounded-lg p-2">
+              <div className="flex flex-wrap max-h-19 overflow-y-scroll">
+                {file.map((fileData, index) => (
+                  <Preview 
+                    key={index} 
+                    srcFile={fileData} 
+                    onRemove={() => remove(index)}
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+
         <div className="flex bg-fade/50 p-2 rounded-4xl">
-          <PlusCircleIcon className="size-9 shrink-0 p-2 mt-1 mb-1 ml-1 opacity-70 md:p-1 text-gray-300" onClick={() => inputFile.current.click()}  />
-          <input type="file" onChange={handleFileChange} ref={inputFile} multiple={true} style={{ display: 'none' }}></input>
+          <PlusCircleIcon className="size-9 shrink-0 p-2 mt-1 mb-1 ml-1 opacity-70 md:p-1 text-gray-300" onClick={uploadFile}  />
+          <input type="file" ref={inputFile} onChange={handleFileChange} multiple={true} style={{ display: 'none' }}></input>
           <Input
             value={input}
             onChange={handleInputEvent}
