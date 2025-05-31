@@ -60,7 +60,6 @@ export default function ChatWindow(){
         console.log(`Processing message:`, topass.message)
         const messageData = JSON.parse(topass.message)
         setMessages(prev => [...prev, messageData])
-        setFile(messageData.media)
       } 
       else if(topass.type === 'mine'){
         console.log(`Processing notif:`, topass.message)
@@ -106,10 +105,11 @@ export default function ChatWindow(){
   const handleFileChange = (e) => {
     const uploaded = e.target.files
     for(let i=0; i<uploaded.length; i++){
+      console.log(uploaded[i].name)
       new Promise(resolve => {
         let baseURL = ""
         let reader = new FileReader()
-        reader.readAsDataURL(e.target.files[i])
+        reader.readAsDataURL(uploaded[i])
         reader.onload = () => {
           console.log("Called", reader)
           baseURL = reader.result
@@ -154,7 +154,7 @@ export default function ChatWindow(){
         {file.length > 0 && (
           <div className="px-4 py-2">
             <div className="bg-gray-100/20 rounded-lg p-2">
-              <div className="flex flex-wrap max-h-19 overflow-y-scroll">
+              <div className="flex flex-wrap max-h-19 items-center overflow-y-scroll">
                 {file.map((fileData, index) => (
                   <Preview 
                     key={index} 
@@ -168,7 +168,7 @@ export default function ChatWindow(){
         )}
 
         <div className="flex bg-fade/50 p-2 rounded-4xl">
-          <PlusCircleIcon className="size-9 shrink-0 p-2 mt-1 mb-1 ml-1 opacity-70 md:p-1 text-gray-300" onClick={uploadFile}  />
+          <PlusCircleIcon className="size-9 shrink-0 p-2 mt-1 mb-1 ml-1 opacity-70 md:p-1 text-gray-300 cursor-pointer" onClick={uploadFile}  />
           <input type="file" ref={inputFile} onChange={handleFileChange} multiple={true} style={{ display: 'none' }}></input>
           <Input
             value={input}
