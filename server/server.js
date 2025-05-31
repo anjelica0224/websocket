@@ -1,6 +1,5 @@
 const {WebSocketServer} = require('ws')
 const http = require('http');
-const { parse } = require('url');
 
 const server = http.createServer((req, res) => {
   res.writeHead(200);

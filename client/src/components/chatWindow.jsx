@@ -14,18 +14,14 @@ export default function ChatWindow(){
   const endMessage = useRef(null)
   const [name, ] = useState(() => bandname())
   const [id, ] = useState(() => nanoid())
+  const [file, setFile] = useState([]);
+  const inputFile = useRef(null);
   const [messages, setMessages] = useState(() => ([
     {
       id: "server",
       name: "Server",
       date: new Date(),
       text: "Hey Welcome to the hub! \n This is a space for open discussion and exploration \n Feel free to start a conversation that boggles our mind as well! \n Happy talking!"
-    },
-    {
-      id: "server",
-      name: "Server",
-      date: new Date(),
-      text: `${name} just joined the chat`
     }
   ]))
   const { 
@@ -70,24 +66,18 @@ export default function ChatWindow(){
       const messageData = JSON.parse(topass.message)
       const joinText = `${messageData.name} just joined the chat`
       console.log(` join--${joinText}`)
-      const isDuplicate = messages.some(msg => 
-        msg.name === 'Server' && 
-        msg.text === joinText
-      )
-      if (!isDuplicate){
-        setMessages(prev => [...prev, {
-          id: 'server',
-          name: 'Server',
-          date: new Date(),
-          text: `${messageData.name} just joined the chat`
-        }])
-      }
+      setMessages(prev => [...prev, {
+        id: 'server',
+        name: 'Server',
+        date: new Date(),
+        text: `${messageData.name} just joined the chat`
+      }])
+    
     }
   }
 }, [lastMessage]);
  
-  // console.log(input)
-  function handleEvent(e) {
+  function handleInputEvent(e) {
     setInput(e.target.value)
   }
 
@@ -103,13 +93,6 @@ export default function ChatWindow(){
     });
     setInput("");
   }
-  // function sendBinaryData() {
-  //   if (readyState === ReadyState.OPEN) {
-  //     sendMessage(imageData);
-  //   } else {
-  //     console.error("WebSocket connection not open!");
-  //   }
-  // }
 
   const scrollToBottom = () => {
     endMessage.current?.scrollIntoView({ behavior: "smooth" })
@@ -118,10 +101,8 @@ export default function ChatWindow(){
     scrollToBottom()
   }, [messages]);
 
-  const [file, setFile] = useState([]);
-  const inputFile = useRef(null);
 
-  const handleChange = (e) => {
+  const handleFileChange = (e) => {
     setFile([...file, e.target.files[0]]);
     console.log(file)
   };
@@ -142,13 +123,10 @@ export default function ChatWindow(){
         </div>
         <div className="flex bg-fade/50 p-2 rounded-4xl">
           <PlusCircleIcon className="size-9 shrink-0 p-2 mt-1 mb-1 ml-1 opacity-70 md:p-1 text-gray-300" onClick={() => inputFile.current.click()}  />
-          <input type="file" onChange={handleChange} ref={inputFile} multiple={true}
-          // style={{ display: 'none' }}
-          >
-          </input>
+          <input type="file" onChange={handleFileChange} ref={inputFile} multiple={true} style={{ display: 'none' }}></input>
           <Input
             value={input}
-            onChange={handleEvent}
+            onChange={handleInputEvent}
             onKeyDown={(e) => {
               if (e.key === "Enter") {
                 e.preventDefault();
