@@ -9,7 +9,7 @@ import Preview from './preview'
 import useWebSocket, { ReadyState } from 'react-use-websocket';
 
 export default function ChatWindow(){
-  const socketUrl = 'ws://127.0.0.1:443'
+  const socketUrl = import.meta.env.PROD ? "wss://aj-websocket.foo.ng" : 'ws://127.0.0.1:443'
   const [input, setInput] = useState("")
   const endMessage = useRef(null)
   const [name, ] = useState(() => bandname())
