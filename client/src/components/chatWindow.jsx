@@ -113,7 +113,10 @@ export default function ChatWindow(){
         reader.onload = () => {
           console.log("Called", reader)
           baseURL = reader.result
-          setFile(prev => [...prev, baseURL])
+          setFile(prev => [...prev, {
+            file_name: uploaded[i].name,
+            base64: baseURL
+          }])
           resolve(baseURL)
         }
       })  
