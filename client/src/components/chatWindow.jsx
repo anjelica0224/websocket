@@ -39,7 +39,6 @@ export default function ChatWindow(){
           text: `${name} just joined the chat`,
           type: 'mine'
         })
-        console.log('why')
       }
     },
     onClose: () => {
@@ -54,18 +53,14 @@ export default function ChatWindow(){
   useEffect(() => {
     if (lastMessage !== null) {
       const topass = JSON.parse(lastMessage.data)
-      console.log(`Received:`, topass)
       
       if(topass.type === 'msg'){
-        console.log(`Processing message:`, topass.message)
         const messageData = JSON.parse(topass.message)
         setMessages(prev => [...prev, messageData])
       } 
       else if(topass.type === 'mine'){
-        console.log(`Processing notif:`, topass.message)
         const messageData = JSON.parse(topass.message)
         const joinText = `${messageData.name} just joined the chat`
-        console.log(` join--${joinText}`)
         setMessages(prev => [...prev, {
           id: 'server',
           name: 'Server',
@@ -82,7 +77,6 @@ export default function ChatWindow(){
 
   function handleSend() {
     if ((input === "" && !file )|| readyState !== ReadyState.OPEN) return
-    console.log('handleSend')
     sendJsonMessage({
       id,
       name,
@@ -105,13 +99,11 @@ export default function ChatWindow(){
   const handleFileChange = (e) => {
     const uploaded = e.target.files
     for(let i=0; i<uploaded.length; i++){
-      console.log(uploaded[i].name)
       new Promise(resolve => {
         let baseURL = ""
         let reader = new FileReader()
         reader.readAsDataURL(uploaded[i])
         reader.onload = () => {
-          console.log("Called", reader)
           baseURL = reader.result
           setFile(prev => [...prev, {
             file_name: uploaded[i].name,
@@ -143,9 +135,9 @@ export default function ChatWindow(){
                 <div key={i}>{line || '\u00A0'}</div>
               ))}
               {item.media && item.media.length > 0 && (
-                <div className="mt-2 flex flex-wrap">
+                <div className="flex flex-wrap">
                   {item.media.map((mediaFile, mediaIdx) => (
-                    <Preview key={mediaIdx} srcFile={mediaFile} />
+                    <Preview key={mediaIdx} srcFile={mediaFile} download_media={true}/>
                   ))}
                 </div>
               )}

@@ -11,13 +11,9 @@ server.listen(PORT, () => console.log(`HTTP Server listening on ${PORT}`));
 const socket = new WebSocketServer({server})
 socket.on('connection', (ws) => {
   console.log('Client connected');
-  ws.on('message', (data, isBinary) => {
-    console.log(data)
+  ws.on('message', (data) => {
     const data1 = data.toString();
-    console.log(` data1 ${data1}`)
     const parsedData = JSON.parse(data1);
-    console.log(`parsedData ${parsedData}`)
-    console.log(parsedData.type)
     if (parsedData.type === 'msg') {
       const chatMsg = {
         type: 'msg',
@@ -39,9 +35,7 @@ socket.on('connection', (ws) => {
 })
 
 function broadcast(obj) {
-  const data = JSON.stringify(obj);
   socket.clients.forEach(client => {
-    console.log(`sending message: ${data}`)
     client.send(JSON.stringify(obj))
   })
 }

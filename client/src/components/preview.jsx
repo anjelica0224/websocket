@@ -1,11 +1,19 @@
-import {FileIcon, XCircleIcon} from "@phosphor-icons/react"
-export default function Preview({srcFile, onRemove, download}) {
+import {FileIcon, XCircleIcon, DownloadSimpleIcon} from "@phosphor-icons/react"
+
+export default function Preview({srcFile, onRemove}) {
   const extension = srcFile.file_name.split('.').pop()
   var isImage = (srcFile.base64.split('/')[0]).split(':')[1]
-
+  const handleDownload = () => {
+    const url = srcFile.base64;
+    const link = document.createElement('a');
+    link.target = '_blank';
+    link.href = url;
+    link.download = `${srcFile.file_name}`;
+    link.click();
+  }
   if (isImage == 'image') {
     return (
-      <div className="relative group inline-block m-1">
+      <div className="relative group inline-block m-1" onClick={handleDownload}>
         <img
           src={srcFile.base64}
           className="w-16 h-16 object-cover rounded-lg border border-gray-300"
@@ -16,7 +24,7 @@ export default function Preview({srcFile, onRemove, download}) {
   }
   
   return (
-    <div className="relative group inline-block m-1">
+    <div className="relative group inline-block m-1" onClick={handleDownload}>
       <div className="w-16 h-16 bg-gray-100 rounded-lg border border-gray-300 flex flex-col items-center justify-center">
         <FileIcon className="w-6 h-6 text-gray-600" />
         <span className="text-xs text-gray-500 w-full text-center uppercase font-medium">

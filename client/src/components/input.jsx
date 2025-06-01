@@ -1,7 +1,6 @@
 import { useRef, useState } from "react";
 
 export default function Input ({ maxRows = 5, ...props }) {
-
   return (
     <textarea
       rows={1}
