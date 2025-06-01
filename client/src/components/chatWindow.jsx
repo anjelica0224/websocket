@@ -20,7 +20,7 @@ export default function ChatWindow(){
     {
       id: "server",
       name: "Server",
-      date: new Date(),
+      date: `${new Date().getHours()}:${new Date().getMinutes()}`,
       text: "Hey Welcome to the hub! \n This is a space for open discussion and exploration \n Feel free to start a conversation that boggles our mind as well! \n Happy talking!"
     }
   ]))
@@ -35,7 +35,7 @@ export default function ChatWindow(){
         sendJsonMessage({
           id,
           name,
-          date: new Date(),
+          date: `${new Date().getHours()}:${new Date().getMinutes()}`,
           text: `${name} just joined the chat`,
           type: 'mine'
         })
@@ -64,7 +64,7 @@ export default function ChatWindow(){
         setMessages(prev => [...prev, {
           id: 'server',
           name: 'Server',
-          date: new Date(),
+          date: `${new Date().getHours()}:${new Date().getMinutes()}`,
           text: `${messageData.name} just joined the chat`
         }])
       }
@@ -80,7 +80,7 @@ export default function ChatWindow(){
     sendJsonMessage({
       id,
       name,
-      date: new Date(),
+      date: `${new Date().getHours()}:${new Date().getMinutes()}`,
       text: input,
       type: 'msg',
       media: file
@@ -99,8 +99,14 @@ export default function ChatWindow(){
   const handleFileChange = (e) => {
     const uploaded = e.target.files
     for(let i=0; i<uploaded.length; i++){
-      new Promise(resolve => {
+      new Promise((resolve, reject)=> {
         let baseURL = ""
+        let size = uploaded[i].size
+        if (size>5242880){
+          alert(`File "${uploaded[i].name}" exceeds 5 MB limit`)
+          reject(new Error("File size exceeds 5 MB"))
+          return
+        }
         let reader = new FileReader()
         reader.readAsDataURL(uploaded[i])
         reader.onload = () => {
@@ -130,7 +136,7 @@ export default function ChatWindow(){
         <div className="flex flex-col py-2 px-4 rounded-4xl grow overflow-y-scroll">
           {/* {messages.map((item, idx) => <Message key={idx} name={item.name}> {item.text} </Message>)} */}
           {messages.map((item, idx) => (
-            <Message key={idx} name={item.name} id={item.id}>
+            <Message key={idx} name={item.name} id={item.id} date={item.date}>
               {item.text.split('\n').map((line, i) => (
                 <div key={i}>{line || '\u00A0'}</div>
               ))}
