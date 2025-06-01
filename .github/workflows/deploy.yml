@@ -27,7 +27,7 @@ jobs:
         working-directory: client
       
       - name: Build React app
-        run: npm run build
+        run: npm run build -- --base=/websocket
         working-directory: client
       
       - name: Deploy to GitHub Pages
