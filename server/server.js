@@ -1,9 +1,13 @@
 const {WebSocketServer} = require('ws')
 const http = require('http');
 
+// const server = http.createServer((req, res) => {
+//   res.writeHead(200);
+//   res.end("WebSocket server is running locally.");
+// });
 const server = http.createServer((req, res) => {
-  res.writeHead(200);
-  res.end("WebSocket server is running locally.");
+  res.writeHead(301, { "Location": "https://anjelica0224.github.io/websocket/" });
+  res.end();
 });
 const PORT = process.env.PORT || 443;
 server.listen(PORT, () => console.log(`HTTP Server listening on ${PORT}`));
