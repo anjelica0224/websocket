@@ -20,7 +20,7 @@ export default function ChatWindow(){
     {
       id: "server",
       name: "Server",
-      date: `${new Date().getHours()}:${new Date().getMinutes()}`,
+      date: timeformat(),
       text: "Hey Welcome to the hub! \n This is a space for open discussion and exploration \n Feel free to start a conversation that boggles our mind as well! \n Happy talking!"
     }
   ]))
@@ -35,7 +35,7 @@ export default function ChatWindow(){
         sendJsonMessage({
           id,
           name,
-          date: `${new Date().getHours()}:${new Date().getMinutes()}`,
+          date: timeformat(),
           text: `${name} just joined the chat`,
           type: 'mine'
         })
@@ -47,7 +47,8 @@ export default function ChatWindow(){
     onError: (error) => {
       console.error('WebSocket error:', error)
     },
-    share: true
+    share: true,
+    shouldReconnect: (closeEvent) => true,
   });
 
   useEffect(() => {
@@ -64,7 +65,7 @@ export default function ChatWindow(){
         setMessages(prev => [...prev, {
           id: 'server',
           name: 'Server',
-          date: `${new Date().getHours()}:${new Date().getMinutes()}`,
+          date: timeformat(),
           text: `${messageData.name} just joined the chat`
         }])
       }
@@ -75,13 +76,23 @@ export default function ChatWindow(){
     setInput(e.target.value)
   }
 
+  function timeformat() {
+    const time1 = new Date() 
+    let hour = time1.getHours()
+    if (hour < 10) { hour = '0' + hour; }
+    let min = time1.getMinutes()
+    if (min < 10) { min = '0' + min; }
+    return `${hour}:${min}`
+  }
+
+
   function handleSend() {
     if (readyState !== ReadyState.OPEN) return
     if (input.trim() === "" && (!file || file.length === 0)) return
     sendJsonMessage({
       id,
       name,
-      date: `${new Date().getHours()}:${new Date().getMinutes()}`,
+      date: timeformat(),
       text: input,
       type: 'msg',
       media: file
