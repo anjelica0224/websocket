@@ -1,24 +1,65 @@
-WebSocket-Based Chat Application
 
-This project demonstrates a simple WebSocket-powered chat application. It establishes a persistent, bi-directional connection between a client and a server, allowing real-time communication similar to a chat room.
+# Bell Jar
 
-Bi-directional communication: Messages can be sent from both the client and the server.
+Hey there! This is _my kinda Bell Jar_, my real-time chat server.
 
-Persistent connection: The connection remains open, enabling real-time updates.
-
-Multi-user support: Multiple clients can connect to the server simultaneously, with random colors assigned to thier profiles!
-
-Chat-server link - https://aj-websocket.foo.ng
-
-<div style="display: flex; justify-content: space-between;">
-  <img width="700" alt="image1" src="https://github.com/user-attachments/assets/78400b8e-473a-4467-86b3-bec59e1d84b0" />
-  <img width="700" alt="image2" src="https://github.com/user-attachments/assets/ff63aeb1-5008-4e5a-bf10-17bb63e9383f" />
-</div>
+I built this to explore WebSockets and create a spot super easy to access from any browser, any device, with hidden identities, and nothing else needed. Plus, I love Sylvia Plath, hence the name, cuz bell jar smh rhymed with socket(_not literally_). 
 
 
+## What It Does
 
-Usage:
-1. Clone the repository: `git clone https://github.com/anjelica0224/websocket.git`
-3. Navigate to the server directory. Start the server: Run the server script (`node server.js`).
-4. Open the client: Access the client application (`index.html`) in multiple browsers.
-5. Start chatting: Send messages from each browser, and they will be displayed in all connected clients.
+* uses WebSockets to create a permanent connection between your browser and the server, zipping messages back and forth in real-time
+* responsive design across all devices
+* users get unique names and cool avatars
+* send files (up to 5MB) with preview and download options
+
+
+###
+
+This project kicked off last year as a basic HTML, CSS, and JavaScript site, mainly for laptops. This year, I rebuilt the whole thing from the ground up using React.js and Tailwind CSS for a responsive ui with a few more features.
+
+#### Version 0.0 (checkout the branch wsv1)
+
+<img src="client/src/assets/v1.webp" alt="Bell Jar Desktop View 1" width="400" />
+
+#### Version 1.0 
+
+<!-- ![Screenshot of Version 2 of My Kinda Bell Jar (React/Tailwind - Responsive)](/client/src/assets/v21.webp) -->
+<table>
+  <tr>
+    <td>
+      <img src="client/src/assets/v21.webp" alt="Bell Jar Desktop View 1" width="400" />
+      <br/>
+      <img src="client/src/assets/v22.webp" alt="Bell Jar Desktop View 2" width="400" />
+    </td>
+    <td>
+      <img src="client/src/assets/v2m.webp" alt="Bell Jar Mobile View" height="450" />
+    </td>
+  </tr>
+</table>
+
+
+## Tech Stack
+
+* **Frontend:** React.js, Tailwind CSS, react useWebSocket
+* **Backend:** Node.js, ws(a nodejs websocket library)
+
+ used [bandname](https://github.com/Prismatik/bandname) to generate really cool names, [nanoid](https://www.npmjs.com/package/nanoid) to generate unique IDs and [react-nice-avatars](https://www.npmjs.com/package/react-nice-avatar) to generate cool avatars for users.
+
+
+## Quick Start
+
+```bash
+# Clone the repository
+git clone https://github.com/anjelica0224/websocket.git
+cd websocket
+
+# Install dependencies
+npm install
+
+# Start the server
+npm start
+
+# Open another terminal window and navigate to client directory
+cd client
+npm run dev
