@@ -1,8 +1,11 @@
 import { ListIcon } from "@phosphor-icons/react";
 export default function Home({openOverlayFn}){
   return(
-
-    <div className="h-svh w-screen bg-[url(https://images.unsplash.com/photo-1520531158340-44015069e78e?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fGJsYWNrJTIwYW5kJTIwd2hpdGUlMjBjaXR5fGVufDB8fDB8fHww)] bg-cover bg-fixed bg-center overflow-hidden">
+    <div className="relative h-dvh w-screen">
+      <img
+        className="fixed -z-10 h-dvh w-screen object-cover"
+        src="https://images.unsplash.com/photo-1520531158340-44015069e78e?fm=jpg&q=60&w=3000"
+      />
       <div className="flex gap-2 justify-items-center">
         <ListIcon size={24} color="#ffffff" className="ms-2 mt-1 cursor-pointer" onClick={openOverlayFn} />
         <span className="text-neutral-100 font-serif text-2xl">About</span>
@@ -12,7 +15,5 @@ export default function Home({openOverlayFn}){
         <h1 className="font-cinzel text-6xl font-bold text-neutral-100 myshadow whitespace-nowrap sm:text-7xl">BELL JAR</h1>
       </div>
     </div>
-    
   )
 }
-
